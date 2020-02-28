@@ -8,13 +8,15 @@ import { PhotoModule } from '../../classes/photo/photo.module';
 import { CardModule } from 'src/app/shared/components/card/card.module';
 import { SearchComponent } from './search/search.component';
 import { DarkenonHoverModule } from 'src/app/shared/diretives/darken-on-hover/darken-on-hover.module';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   imports: [
     CommonModule,
     PhotoModule,
     CardModule,
-    DarkenonHoverModule
+    DarkenonHoverModule,
+    CoreModule
   ],
   declarations: [PhotoListComponent, PhotosComponent, LoadButtonComponent, FilterByDescriptionPipe, SearchComponent],
 })
