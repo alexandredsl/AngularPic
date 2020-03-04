@@ -5,6 +5,8 @@ import { NotFoundComponent } from "./errors/not-found/not-found.component";
 import { PhotoListComponent } from "./photos/components/photo-list/photo-list.component";
 import { PhotoFormComponent } from "./photos/components/photo-form/photo-form.component";
 import { PhotoListResolver } from "./photos/components/photo-list/photo-list-resolver";
+import { RequiresAuthenticationGuard } from "./core/auth/require-authentication.guard";
+import { PhotoDetailsComponent } from "./photos/components/photo-details/photo-details.component";
 
 const routes: Routes = [
   {
@@ -14,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: "home",
-    loadChildren: './home/home.module#HomeModule'
+    loadChildren: "./home/home.module#HomeModule"
   },
 
   {
@@ -24,8 +26,14 @@ const routes: Routes = [
       photos: PhotoListResolver
     }
   },
-  { path: "p/add", component: PhotoFormComponent },
-  { path: "**", component: NotFoundComponent }
+  {
+    path: "p/add",
+    component: PhotoFormComponent,
+    canActivate: [RequiresAuthenticationGuard]
+  },
+  { path: "p/:photoId", component: PhotoDetailsComponent },
+  { path: "not-found", component: NotFoundComponent },
+  { path: "**", redirectTo: "not-found" }
 ];
 
 @NgModule({
